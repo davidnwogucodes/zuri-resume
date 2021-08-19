@@ -13,10 +13,18 @@
   </head>
   <body>
     <div>
-      <ul>
-        <% messages.forEach(message=>{%>
+      <ul class="">
+        <% messages.msg.forEach(message=>{%>
 
-        <li><%message.message%></li>
+        <li class="list">
+          <div>
+            Name:<%=message.name%>,
+            <p>
+              <span> Email: <%=message.email%> </span>
+            </p>
+            <p>Message: <%=message.message%></p>
+          </div>
+        </li>
         <%})%>
       </ul>
     </div>

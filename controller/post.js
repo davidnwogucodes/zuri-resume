@@ -14,20 +14,26 @@ module.exports = {
       if (!message) {
         message = `Hi from ${name}`;
       }
+      // let obj = {
+      //   msg: [],
+      // };
       const newMessage = {
         name: name,
         email: email,
         message: message,
       };
-      const json = JSON.stringify(newMessage);
 
-      fs.appendFile(
+      fs.readFile(
         "./database/messages.json",
-        JSON.stringify(message, null, 2),
-        (err, data) => {
+        "utf8",
+        function readFileCallback(err, data) {
           if (err) {
             return;
           }
+          const obj = JSON.parse(data); //now it an object
+          obj.msg.push(newMessage); //add some data
+          const json = JSON.stringify(obj); //convert it back to json
+          fs.writeFileSync("./database/messages.json", json, "utf8");
         }
       );
       res.redirect("/");
@@ -45,7 +51,6 @@ module.exports = {
         if (err) {
           return;
         }
-        // console.log(JSON.parse(data));
         if (email !== data.admin.email) {
           return;
         }
