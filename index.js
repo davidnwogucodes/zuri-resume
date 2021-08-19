@@ -1,5 +1,5 @@
 const express = require("express");
-const PORT = 4022;
+const PORT = process.env.PORT || 4022;
 const path = require("path");
 const router = require("./router");
 
@@ -17,9 +17,9 @@ app.use((err, req, res, next) => {
   if (err) {
     console.log(err.message);
   }
-  process.on("SIGINT", () => {
-    process.exit(0);
-  });
+  // process.on("SIGINT", () => {
+  //   process.exit(0);
+  // });
 });
 
 app.listen(PORT, () => {
